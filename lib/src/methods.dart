@@ -148,16 +148,19 @@ Future<Response> put({
   required final String url,
   final Map<String, String> headers = defaultJsonHeaders,
   final dynamic body,
+  final Map<String, String>? params,
   final Duration timeoutDuration = defaultTimeoutDuration,
 }) async {
+  var fullUrl = getFullURL(url, params);
   try {
-    final response =
-        await http.put(Uri.parse(url), headers: headers, body: body).timeout(
+    final response = await http
+        .put(Uri.parse(fullUrl), headers: headers, body: body)
+        .timeout(
       timeoutDuration,
       onTimeout: () {
         printDebugLog(
           tag,
-          '\nRequest URL: $url'
+          '\nRequest URL: $fullUrl'
           '\nRequest Method: ${HttpMethod.PUT}'
           '\nRequest Headers: ${headers.toString()}'
           '\nRequest Body: ${body!}'
@@ -171,7 +174,7 @@ Future<Response> put({
     ).then((http.Response response) {
       printDebugLog(
         tag,
-        '\nRequest URL: $url'
+        '\nRequest URL: $fullUrl'
         '\nRequest Method: ${HttpMethod.PUT}'
         '\nRequest Headers: ${headers.toString()}'
         '\nRequest Body: ${body!}'
@@ -207,16 +210,20 @@ Future<Response> patch({
   required final String url,
   final Map<String, String> headers = defaultJsonHeaders,
   final dynamic body,
+  final Map<String, String>? params,
   final Duration timeoutDuration = defaultTimeoutDuration,
 }) async {
+  var fullUrl = getFullURL(url, params);
+
   try {
-    final response =
-        await http.patch(Uri.parse(url), headers: headers, body: body).timeout(
+    final response = await http
+        .patch(Uri.parse(fullUrl), headers: headers, body: body)
+        .timeout(
       timeoutDuration,
       onTimeout: () {
         printDebugLog(
           tag,
-          '\nRequest URL: $url'
+          '\nRequest URL: $fullUrl'
           '\nRequest Method: ${HttpMethod.PUT}'
           '\nRequest Headers: ${headers.toString()}'
           '\nRequest Body: ${body!}'
@@ -230,7 +237,7 @@ Future<Response> patch({
     ).then((http.Response response) {
       printDebugLog(
         tag,
-        '\nRequest URL: $url'
+        '\nRequest URL: $fullUrl'
         '\nRequest Method: ${HttpMethod.PUT}'
         '\nRequest Headers: ${headers.toString()}'
         '\nRequest Body: ${body!}'
@@ -266,15 +273,18 @@ Future<Response> delete({
   required final String url,
   final Map<String, String> headers = defaultJsonHeaders,
   final dynamic body,
+  final Map<String, String>? params,
   final Duration timeoutDuration = defaultTimeoutDuration,
 }) async {
+  var fullUrl = getFullURL(url, params);
+
   try {
     final response = await http
-        .delete(Uri.parse(url), headers: headers)
+        .delete(Uri.parse(fullUrl), headers: headers)
         .timeout(timeoutDuration, onTimeout: () {
       printDebugLog(
         tag,
-        '\nRequest URL: $url'
+        '\nRequest URL: $fullUrl'
         '\nRequest Method: ${HttpMethod.DELETE}'
         '\nRequest Headers: ${headers.toString()}'
         '\nRequest Body: $body}'
@@ -287,7 +297,7 @@ Future<Response> delete({
     }).then((http.Response response) {
       printDebugLog(
         tag,
-        '\nRequest URL: $url'
+        '\nRequest URL: $fullUrl'
         '\nRequest Method: ${HttpMethod.DELETE}'
         '\nRequest Headers: ${headers.toString()}'
         '\nRequest Body: $body'
@@ -324,25 +334,19 @@ Future<StreamedResponse> apiCallWithFile({
   required final String url,
   final Map<String, String> headers = defaultJsonHeaders,
   final Map<String, String>? body,
+  final Map<String, String>? params,
   required final String apiKeyForFiles,
   required final List<String> filePaths,
   final Duration timeoutDuration = defaultTimeoutDuration,
 }) async {
+  var fullUrl = getFullURL(url, params);
   var request;
   switch (apiMethod) {
-    case HttpMethod.GET:
-      {
-        request = http.MultipartRequest(
-          'GET',
-          Uri.parse(url),
-        );
-      }
-      break;
     case HttpMethod.POST:
       {
         request = http.MultipartRequest(
           'POST',
-          Uri.parse(url),
+          Uri.parse(fullUrl),
         );
       }
       break;
@@ -350,7 +354,7 @@ Future<StreamedResponse> apiCallWithFile({
       {
         request = http.MultipartRequest(
           'PUT',
-          Uri.parse(url),
+          Uri.parse(fullUrl),
         );
       }
       break;
@@ -358,7 +362,7 @@ Future<StreamedResponse> apiCallWithFile({
       {
         request = http.MultipartRequest(
           'PATCH',
-          Uri.parse(url),
+          Uri.parse(fullUrl),
         );
       }
       break;
@@ -366,7 +370,7 @@ Future<StreamedResponse> apiCallWithFile({
       {
         request = http.MultipartRequest(
           'POST',
-          Uri.parse(url),
+          Uri.parse(fullUrl),
         );
       }
   }
@@ -400,7 +404,7 @@ Future<StreamedResponse> apiCallWithFile({
       onTimeout: () {
         printDebugLog(
           tag,
-          '\nRequest URL: $url'
+          '\nRequest URL: $fullUrl'
           '\nRequest Method: $apiMethod'
           '\nRequest Headers: $headers'
           '\nRequest Key: $apiKeyForFiles'
@@ -416,7 +420,7 @@ Future<StreamedResponse> apiCallWithFile({
     ).then((http.StreamedResponse response) {
       printDebugLog(
         tag,
-        '\nRequest URL: $url'
+        '\nRequest URL: $fullUrl'
         '\nRequest Method: $apiMethod'
         '\nRequest Headers: $headers'
         '\nRequest Key: $apiKeyForFiles'

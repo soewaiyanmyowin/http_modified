@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 void printDebugLog(String tag, String msg) {
-  log('$tag : $msg');
+  log('$tag : $msg', name: tag);
 }
 
 String getFullURL(final String url, final Map<String, String>? params) {
