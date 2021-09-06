@@ -1,10 +1,6 @@
 import 'package:http/http.dart' as http;
 
-enum ResponseStatus {
-  ok,
-  timeout,
-  connectionError,
-}
+import 'enums.dart';
 
 class Response {
   ResponseStatus status;

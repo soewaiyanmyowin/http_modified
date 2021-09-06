@@ -6,16 +6,10 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 import 'consts.dart';
+import 'enums.dart';
 import 'response.dart';
 import 'utils.dart';
 
-enum HttpMethod {
-  GET,
-  POST,
-  PUT,
-  PATCH,
-  DELETE,
-}
 Future<Response> get({
   final Function(Response)? onResponse,
   final VoidCallback? onTimeout,
@@ -224,7 +218,7 @@ Future<Response> patch({
         printDebugLog(
           tag,
           '\nRequest URL: $fullUrl'
-          '\nRequest Method: ${HttpMethod.PUT}'
+          '\nRequest Method: ${HttpMethod.PATCH}'
           '\nRequest Headers: ${headers.toString()}'
           '\nRequest Body: ${body!}'
           '\nRequest Timeout: $timeoutDuration',
@@ -238,7 +232,7 @@ Future<Response> patch({
       printDebugLog(
         tag,
         '\nRequest URL: $fullUrl'
-        '\nRequest Method: ${HttpMethod.PUT}'
+        '\nRequest Method: ${HttpMethod.PATCH}'
         '\nRequest Headers: ${headers.toString()}'
         '\nRequest Body: ${body!}'
         '\nResponse Code: ${response.statusCode}'
@@ -280,7 +274,10 @@ Future<Response> delete({
 
   try {
     final response = await http
-        .delete(Uri.parse(fullUrl), headers: headers)
+        .delete(
+      Uri.parse(fullUrl),
+      headers: headers,
+    )
         .timeout(timeoutDuration, onTimeout: () {
       printDebugLog(
         tag,
