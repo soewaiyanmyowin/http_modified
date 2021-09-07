@@ -11,7 +11,6 @@ pubspec.lock
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/
-
 # Avoid committing generated Javascript files:
 *.dart.js
 *.info.json      # Produced by the --dump-info flag.
@@ -20,3 +19,7 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+
+lib/.DS_Store
+.DS_Store
