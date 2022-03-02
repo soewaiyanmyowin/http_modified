@@ -1,14 +1,20 @@
 name: http_modified
-description: A starting point for Dart libraries or applications.
-version: 0.0.1
-homepage: https://soewaiyanmyowin.dev
+description: The easiest package to use for calling REST APIs in Flutter, heavily based on http package.
+version: 0.0.3
+homepage: https://github.com/soewaiyanmyowin/http_modified
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.14.0 <3.0.0'
 
 dependencies:
- http: ^0.13.3
- http_parser: ^4.0.0
+ flutter:
+    sdk: flutter
+ # A composable, multi-platform, Future-based API for HTTP requests.
+ # https://pub.dev/packages/http
+ http: ^0.13.4
+ # A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
+ # https://pub.dev/packages/equatable
+ equatable: ^2.0.3
 
 dev_dependencies:
  test: ^1.17.12

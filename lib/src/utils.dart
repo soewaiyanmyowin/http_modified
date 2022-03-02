@@ -1,7 +1,13 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 void printDebugLog(String tag, String msg) {
-  log('$tag : $msg', name: tag);
+  if (kIsWeb) {
+    print('$tag: $msg');
+  } else {
+    log(msg, name: tag);
+  }
 }
 
 String getFullURL(final String url, final Map<String, String>? params) {

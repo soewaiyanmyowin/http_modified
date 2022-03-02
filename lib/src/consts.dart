@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:_http';
 
 class HttpHeaderTypes {
   static const applicationJson = 'application/json';
@@ -11,4 +11,10 @@ const defaultJsonHeaders = {
   HttpHeaders.acceptHeader: HttpHeaderTypes.applicationJson,
 };
 
-const Duration defaultTimeoutDuration = Duration(seconds: 30);
+Map<String, String> jsonHeadersWithBearer(String token) => {
+      HttpHeaders.contentTypeHeader: HttpHeaderTypes.applicationJson,
+      HttpHeaders.acceptHeader: HttpHeaderTypes.applicationJson,
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+    };
+
+const Duration defaultTimeoutDuration = Duration(seconds: 90);
