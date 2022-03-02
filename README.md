@@ -1,4 +1,4 @@
-A library for Dart developers.
+The easiest package to use for calling REST APIs in Flutter, heavily based on http package.
 
 ## Usage
 
