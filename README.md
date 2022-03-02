@@ -33,4 +33,4 @@ final result = await post(
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://github.com/soewaiyanmyowin/http_modified/issues
+[tracker]: https://github.com/soewaiyanmyowin/http_modified/issues

@@ -1,4 +1,4 @@
-import 'dart:_http';
+import 'dart:io';
 
 class HttpHeaderTypes {
   static const applicationJson = 'application/json';
